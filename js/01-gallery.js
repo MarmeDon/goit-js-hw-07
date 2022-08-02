@@ -22,29 +22,12 @@ const makeGalleryMarkUp = galleryItems.map(createGalleryItemsMarkUp).join('');
 
 refs.gallery.innerHTML = makeGalleryMarkUp;
 
-// function onClick(event) {
-//    event.preventDefault();
-//    basicLightbox.create(`
-// 		<img src="${event.target.dataset.source}">
-// 	`).show();
-// }
-
-refs.gallery.addEventListener('click', onClick)
-
-// Version with Escape
-
 function onClick(event) {
    event.preventDefault();
-	const source = event.target.dataset.source;
-   onOpenModal(source);
-}
-
-function onOpenModal(source) {
    const instance = basicLightbox.create(`
-		<img src="${source}">
+		<img src="${event.target.dataset.source}">
 	`)
    instance.show();
-
    function onCloseModal(event) {
    if (event.code === 'Escape') {
       instance.close();
@@ -52,6 +35,8 @@ function onOpenModal(source) {
 }
    window.addEventListener('keydown', onCloseModal);
 }
+
+refs.gallery.addEventListener('click', onClick)
 
 
 
